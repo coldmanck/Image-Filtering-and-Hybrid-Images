@@ -38,4 +38,4 @@ For this project, and all other projects, you must do a project report in [Markd
 * Privately duplicated version
 
 ### Credits
-	Assignment developed by Min Sun based on James Hays and Derek Hoiem
+	Assignment developed by Min Sun based on James Hays and Derek Hoiem's previous developed projects
