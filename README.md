@@ -6,7 +6,7 @@ Look at image on right from very close, then from far away
 * Due: xxx
 
 ### Overview
-The goal of this assignment is to write an image filtering function and use it to create hybrid images using a simplified version of the SIGGRAPH 2006 paper by Oliva, Torralba, and Schyns. [Hybrid images](http://cvcl.mit.edu/hybridimage.htm) are static images that change in interpretation as a function of the viewing distance. The basic idea is that high frequency tends to dominate perception when it is available, but, at a distance, only the low frequency (smooth) part of the signal can be seen. By blending the high frequency portion of one image with the low-frequency portion of another, you get a hybrid image that leads to different interpretations at different distances.
+The goal of this assignment is to write an image filtering function and use it to create [hybrid images](http://cvcl.mit.edu/hybridimage.htm) using a simplified version of the SIGGRAPH 2006 paper by Oliva, Torralba, and Schyns. Hybrid images are static images that change in interpretation as a function of the viewing distance. The basic idea is that high frequency tends to dominate perception when it is available, but, at a distance, only the low frequency (smooth) part of the signal can be seen. By blending the high frequency portion of one image with the low-frequency portion of another, you get a hybrid image that leads to different interpretations at different distances.
 
 ### Detils
 This project is intended to familiarize you with MATLAB and image filtering. Once you have created an image filtering function, it is relatively straightforward to construct hybrid images. If you don't already know MATLAB, you will find this tutorial on MATLAB helpful.
@@ -26,8 +26,16 @@ For the example shown at the top of the page, the two original images look like 
 For this project, and all other projects, you must do a project report in [Markdown](https://help.github.com/articles/markdown-basics). We provide you with a placeholder report.md document which you can edit. In the report you will describe your algorithm and any decisions you made to write your algorithm a particular way. Then you will show and discuss the results of your algorithm. In the case of this project, show the results of your filtering algorithm (the test script saves such images already) and show some of the intermediate images in the hybrid image pipeline (e.g. the low and high frequency images, which the starter code already saves for you). Also, discuss anything extra you did. Feel free to add any other information you feel is relevant.
 
 ### Rubric
+* +50 pts: Working implementation of image filtering in my_imfilter.m
+* +30 pts: Working hybrid image generation
+* +20 pts: Writeup with several examples of hybrid images
+* +10 pts: Extra credit (up to ten points)
+* -5*n pts: Lose 5 points for every time (after the first) you do not follow the instructions for the hand in format
 
 ### Handing in
+* Publicly fork version
+
+* Privately duplicated version
 
 ### Credits
 	Assignment developed by Min Sun based on James Hays and Derek Hoiem
