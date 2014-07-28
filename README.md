@@ -54,12 +54,12 @@ The starter code provides a function <code>vis_hybrid_image.m</code> to save and
 </p><br>
 
 ## Extra Points
-* +2 pts: If you make your code publicly available to all.
-* +2 pts: If you comments on other public codes by creating a new issue. Make sure you send me a screenshot of the comments.
+* +2 pts: If you make your code publicly available.
+* +2 pts: If you comment on other public codes by creating a new issue. Make sure you send me a screenshot of the comments.
 * Other things that impress me.
 
 ## Writeup
-For this project, and all other projects, you must do a project report in results folder using [Markdown](https://help.github.com/articles/markdown-basics). We provide you with a placeholder index.md document which you can edit. In the report you will describe your algorithm and any decisions you made to write your algorithm a particular way. Then, you will describe how to run your code and if your code depended on other packages. Finally, you will show and discuss the results of your algorithm. In the case of this project, show the results of your filtering algorithm (the test script saves such images already) and show some of the intermediate images in the hybrid image pipeline (e.g. the low and high frequency images, which the starter code already saves for you). Also, discuss anything extra you did. Feel free to add any other information you feel is relevant.
+For this project, and all other projects, you must do a project report in results folder using [Markdown](https://help.github.com/articles/markdown-basics). We provide you with a placeholder [index.md](./results/index.md) document which you can edit. In the report you will describe your algorithm and any decisions you made to write your algorithm a particular way. Then, you will describe how to run your code and if your code depended on other packages. Finally, you will show and discuss the results of your algorithm. In the case of this project, show the results of your filtering algorithm (the test script saves such images already) and show some of the intermediate images in the hybrid image pipeline (e.g. the low and high frequency images, which the starter code already saves for you). Also, discuss anything extra you did. Feel free to add any other information you feel is relevant.
 
 ## Rubric
 * +50 pts: Working implementation of image filtering in my_imfilter.m

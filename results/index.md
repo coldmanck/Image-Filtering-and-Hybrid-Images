@@ -17,6 +17,10 @@ The project is related to
 Code highlights
 ```
 
+## Installation
+* Other required packages.
+* How to compile from source?
+
 ### Results
 
 <table border=1>
