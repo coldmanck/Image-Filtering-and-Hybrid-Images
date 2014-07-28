@@ -68,7 +68,7 @@ For this project, and all other projects, you must do a project report in result
 * +10 pts: Extra credit (up to ten points)
 * -5*n pts: Lose 5 points for every time (after the first) you do not follow the instructions for the hand in format
 
-## Get start & handing in
+## Get start & hand in
 * Publicly fork version (+2 extra points)
 	- [Fork the homework](https://education.github.com/guide/forks) to obtain a copy of the homework in your github account
 	- [Clone the homework](http://gitref.org/creating/#clone) to your local space and work on the code locally
