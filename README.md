@@ -68,10 +68,21 @@ For this project, and all other projects, you must do a project report in result
 * +10 pts: Extra credit (up to ten points)
 * -5*n pts: Lose 5 points for every time (after the first) you do not follow the instructions for the hand in format
 
-## Handing in
-* Publicly fork version
+## Get start & handing in
+* Publicly fork version (+2 extra points)
+	- [Fork the homework](https://education.github.com/guide/forks) to obtain a copy of the homework in your github account
+	- [Clone the homework](http://gitref.org/creating/#clone) to your local space and work on the code locally
+	- Commit and push your local code to your github repo
+	- Once you are done, submit your homework by [creating a pull request](https://help.github.com/articles/creating-a-pull-request)
 
-* Privately duplicated version
+* [Privately duplicated version](https://help.github.com/articles/duplicating-a-repository)
+  - Make a bare clone
+  - mirror-push to new repo
+  - [make new repo private](https://help.github.com/articles/making-a-private-repository-public)
+  - [add aliensunmin as collaborator](https://help.github.com/articles/adding-collaborators-to-a-personal-repository)
+  - [Clone the homework](http://gitref.org/creating/#clone) to your local space and work on the code locally
+  - Commit and push your local code to your github repo
+  - I will clone your repo after the due date
 
 ## Credits
 	Assignment modified by Min Sun based on James Hays and Derek Hoiem's previous developed projects
