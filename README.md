@@ -55,7 +55,7 @@ The starter code provides a function <code>vis_hybrid_image.m</code> to save and
 
 ## Extra Points
 * +2 pts: If you make your code publicly available.
-* +2 pts: If you comment on pull request from students who fork the homework. Make sure you send me a screenshot of the comments to me.
+* +2 pts: If you comment on pull request from students who fork the homework. <del>Make sure you send me a screenshot of the comments to me.</del> We can follow your discussion ourselves.
 * Other things that impress me.
 
 ## Writeup
