@@ -1,4 +1,5 @@
 function output = my_imfilter(image, filter)
+%%
 % This function is intended to behave like the built in function imfilter()
 % See 'help imfilter' or 'help conv2'. While terms like "filtering" and
 % "convolution" might be used interchangeably, and they are indeed nearly
@@ -27,14 +28,33 @@ function output = my_imfilter(image, filter)
 % % behavior. When you write your actual solution, you can't use imfilter,
 % % filter2, conv2, etc. Simply loop over all the pixels and do the actual
 % % computation. It might be slow.
+
 % output = imfilter(image, filter);
 
+%%
+intput_image = image;
 
-%%%%%%%%%%%%%%%%
-% Your code here
-%%%%%%%%%%%%%%%%
+% Get the row & column size of input image and filter in order to admit
+% multi size picture
+[intput_row, intput_col] = size(intput_image(:,:,1));
+[filter_row, filter_col] = size(filter);
 
+% Pad image with zeros (amount = minimum need of filter = half of row and
+% column
+pad_input_image = padarray(intput_image, [(filter_row - 1)/2, (filter_col - 1)/2]);
 
+for layer = 1:3
+    % make all filter_row*filter_col size patch of input image be columns
+    columns = im2col(pad_input_image(:,:,layer), [filter_row, filter_col]);
+    
+    % transpose the filter in order to make it convolution (but not correlation)
+    filter2 = transpose(filter(:));
+    
+    % filter the image
+    filterd_columns = filter2 * columns;
+    
+    % recover from columns to image form
+    intput_image(:,:,layer) = col2im(filterd_columns, [1, 1], [intput_row, intput_col]);
+end
 
-
-
+output = intput_image;
