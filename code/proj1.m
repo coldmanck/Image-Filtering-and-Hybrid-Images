@@ -40,7 +40,7 @@ filter = fspecial('Gaussian', [cutoff_frequency*4+1 1], cutoff_frequency);
 
 % Filtering with a 2D Gaussian can be implemented using two 1D Gaussian 
 % horizontal filters -> faster!
-low_frequencies_image1 = my_imfilter(my_imfilter(image1, filter), filter');
+low_frequencies = my_imfilter(my_imfilter(image1, filter), filter');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Remove the low frequencies from image2. The easiest way to do this is to
@@ -48,20 +48,20 @@ low_frequencies_image1 = my_imfilter(my_imfilter(image1, filter), filter');
 % This will give you an image centered at zero with negative values.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-high_frequencies_image2 = image2 - my_imfilter(my_imfilter(image2, filter), filter');
+high_frequencies = image2 - my_imfilter(my_imfilter(image2, filter), filter');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Combine the high frequencies and low frequencies
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-hybrid_image = low_frequencies_image1 + high_frequencies_image2;
+hybrid_image = low_frequencies + high_frequencies;
 
 %% Visualize and save outputs
-figure(1); imshow(low_frequencies_image1)
-figure(2); imshow(high_frequencies_image2 + 0.5);
+figure(1); imshow(low_frequencies)
+figure(2); imshow(high_frequencies + 0.5);
 vis = vis_hybrid_image(hybrid_image);
 figure(3); imshow(vis);
-imwrite(low_frequencies_image1, 'low_frequencies.jpg', 'quality', 95);
-imwrite(high_frequencies_image2 + 0.5, 'high_frequencies.jpg', 'quality', 95);
+imwrite(low_frequencies, 'low_frequencies.jpg', 'quality', 95);
+imwrite(high_frequencies + 0.5, 'high_frequencies.jpg', 'quality', 95);
 imwrite(hybrid_image, 'hybrid_image.jpg', 'quality', 95);
 imwrite(vis, 'hybrid_image_scales.jpg', 'quality', 95);
