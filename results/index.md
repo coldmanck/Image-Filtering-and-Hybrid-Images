@@ -60,8 +60,8 @@ At first, because of using twice 1-D gaussian filter in `my_filter()`, we need t
 By using Gaussian filter, one can get low-frequencies pictures. And if we would like to get high-frequencies pictures, one easy approach is just output the image subtracted by its low-frequencies image.
 
 ```
-low_frequencies_image1 = my_imfilter(my_imfilter(image1, filter), filter'); 
-high_frequencies_image2 = image2 - my_imfilter(my_imfilter(image2, filter), filter');
+low_frequencies = my_imfilter(my_imfilter(image1, filter), filter'); 
+high_frequencies = image2 - my_imfilter(my_imfilter(image2, filter), filter');
 ```
 
 Consequently, we get low frequencies image and high frequencies image repectively.
@@ -70,7 +70,7 @@ Consequently, we get low frequencies image and high frequencies image repectivel
 
 Just plus them.
 
-`hybrid_image = low_frequencies_image1 + high_frequencies_image2;`
+`hybrid_image = low_frequencies + high_frequencies;`
 
 ## Installation
 Download the repository, open your matlab and change the work folder to `homework1/code`. Then, set images path of `image1` and `image2`.
