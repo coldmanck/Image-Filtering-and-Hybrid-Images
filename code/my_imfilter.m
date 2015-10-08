@@ -43,7 +43,9 @@ intput_image = image;
 % column
 pad_input_image = padarray(intput_image, [(filter_row - 1)/2, (filter_col - 1)/2]);
 
-for layer = 1:3
+output = [];
+
+for layer = 1:size(intput_image, 3) % ensure to be OK when input is gray image
     % make all filter_row*filter_col size patch of input image be columns
     columns = im2col(pad_input_image(:,:,layer), [filter_row, filter_col]);
     
@@ -54,7 +56,5 @@ for layer = 1:3
     filterd_columns = filter2 * columns;
     
     % recover from columns to image form
-    intput_image(:,:,layer) = col2im(filterd_columns, [1, 1], [intput_row, intput_col]);
+    output(:,:,layer) = col2im(filterd_columns, [1, 1], [intput_row, intput_col]);
 end
-
-output = intput_image;

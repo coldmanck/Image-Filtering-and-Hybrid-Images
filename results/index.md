@@ -18,9 +18,9 @@ By hybriding the high-pass-filtered image and low-pass-filtered image, one can c
 ## Implementation
 - **Image filtering**
 
-`my_filter.m` is a function `my_filter()` intending to behave like the built-in function `imfilter()`. The objective of this function is filtering an image. It will have input of the raw image and the specified filter and output filtered image with the same resolution and size. I'll show some indispensable processes in my code below.
+`my_filter.m` is a function `my_filter()` intending to behave like the built-in function `imfilter()`. The objective of this function is filtering an image. It will have input of the raw image and the specified filter and output filtered image with the same resolution and size. I'll show some essential processes in my code below.
 
-First, in order to deal with the problem of that the filter can't be centered on pixels at the image boundary without parts of the filter being out of bounds, it need to be padded with zeros.
+In order to deal with the problem of that the filter can't be centered on pixels at the image boundary without parts of the filter being out of bounds, it need to be padded with zeros.
 
 ```
     % Get the row & column size of input image and filter in order to admit
@@ -32,10 +32,10 @@ First, in order to deal with the problem of that the filter can't be centered on
     % column
     pad_input_image = padarray(intput_image, [(filter_row - 1)/2, (filter_col - 1)/2]);
 ```
-
-Next, filter the image by using useful build-in function, `im2col` and `col2im`. Implement convolution blockly
+Because of difficulty of implementing 2-D convolution, I make the decision to process it by twice 1-D convolution. That is, firstly convolute with vertical mask and secondly convolute with horizontal mask. In matlab, we can convolute the matrixs by using useful build-in function, `im2col` and `col2im`. Finally, output it.
 
 ```
+    output = [];
     for layer = 1:3
         % make all filter_row*filter_col size patch of input image be columns
         columns = im2col(pad_input_image(:,:,layer), [filter_row, filter_col]);
@@ -47,27 +47,21 @@ Next, filter the image by using useful build-in function, `im2col` and `col2im`.
         filterd_columns = filter2 * columns;
         
         % recover from columns to image form
-        intput_image(:,:,layer) = col2im(filterd_columns, [1, 1], [intput_row, intput_col]);
+        output(:,:,layer) = col2im(filterd_columns, [1, 1], [intput_row, intput_col]);
     end
 ```
 
-Finally, output the image.
-
-`output = input_image;`
-
 - **Low-frequencies image and High-frequencies image**
 
-By using Gaussian filter, one can get low-frequencies pictures. And if we would like to get high-frequencies pictures, one easy approach is just output the image subtracted by its low-frequencies image. Below, I'll show the sample code.
+At first, because of using twice 1-D gaussian filter in `my_filter()`, we need to change code in `proj1.m` to make it be 1-D filter.
+
+    `filter = fspecial('Gaussian', [cutoff_frequency*4+1 1], cutoff_frequency);`
+
+By using Gaussian filter, one can get low-frequencies pictures. And if we would like to get high-frequencies pictures, one easy approach is just output the image subtracted by its low-frequencies image.
 
 ```
-    % Filtering with a 2D Gaussian can be implemented using two 1D Gaussian 
-    % horizontal filters -> faster!
-    low_frequencies_image1 = my_imfilter(image1, filter);
-    low_frequencies_image1 = my_imfilter(low_frequencies_image1, filter');
-    
-    low_frequencies_image2 = my_imfilter(image2, filter);
-    low_frequencies_image2 = my_imfilter(low_frequencies_image2, filter');
-    high_frequencies_image2 = image2 - low_frequencies_image2;
+    low_frequencies_image1 = my_imfilter(my_imfilter(image1, filter), filter'); 
+    high_frequencies_image2 = image2 - my_imfilter(my_imfilter(image2, filter), filter');
 ```
 
 Consequently, we get low frequencies image and high frequencies image repectively.
@@ -79,13 +73,13 @@ Just plus them.
     `hybrid_image = low_frequencies_image1 + high_frequencies_image2;`
 
 ## Installation
-Download the repository, open your matlab and change the work folder to `homework1/code`. Then, set images path of 'image1' and `image2`.
+Download the repository, open your matlab and change the work folder to `homework1/code`. Then, set images path of `image1` and `image2`.
 
 Finally, click *Run*!
 
 ## Results
 
-I've tried 4 samples of hybriding image. First is the hybrid image of candidates of next precident of R.O.C., Tsai Ing-Wen & Hung Hsiu-Chu. I found that by tuning the cut-off frequency one can get really different result. For example, the cut-off frequency of the first sample is set 14 (pixels).
+I've tried 4 samples of hybriding image. First one is the hybrid image of candidates of next precident of R.O.C., Tsai Ing-Wen & Hung Hsiu-Chu. I found that by tuning the cut-off frequency one can get really different result. For example, the cut-off frequency of the first sample is set 14 (pixels).
 
 Following pairs are bird & plane, Marilyn & Einstein and motorcycle & bicycle.
 
