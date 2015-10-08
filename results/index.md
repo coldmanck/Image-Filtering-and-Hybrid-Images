@@ -98,3 +98,13 @@ Following pairs are bird & plane, Marilyn & Einstein and motorcycle & bicycle.
 </td>
 </tr>
 </table>
+
+For gray-scale image, I also tried it and show the result below.
+
+<table border=1>
+<tr>
+<td>
+<img src="../results/tsai_hung_rgb.jpg" width="30%"/>
+</td>
+</tr>
+</table>
