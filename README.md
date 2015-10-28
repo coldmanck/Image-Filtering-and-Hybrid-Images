@@ -1,5 +1,3 @@
-# Meng-Jiun Chiou <span style="color:red">(NCTU student)</span>
-
 # Project 1 / Image Filtering and Hybrid Images
 
 ## Overview
