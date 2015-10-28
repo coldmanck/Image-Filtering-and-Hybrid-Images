@@ -1,88 +1,110 @@
-<center>
-<img src="./index_files/hybrid_image.jpg" width="410" height="361">
-<br>
-(Look at image on right from very close, then from far away.)
-</center>
+# Meng-Jiun Chiou <span style="color:red">(NCTU student)</span>
 
-# Project 1: Image Filtering and Hybrid Images
+# Project 1 / Image Filtering and Hybrid Images
 
-## Brief
-* Due: Oct. 14
-* Required files: results/index.md, and code/
+## Overview
+This project mainly can be divided into two parts, image filtering and hybrid images.
 
-##Overview
+- **Image filtering**
 
-<p>The goal of this assignment is to write an image filtering function and use it to create <a href="http://cvcl.mit.edu/hybridimage.htm">hybrid images</a> using a simplified version of the SIGGRAPH 2006 <a href="http://cvcl.mit.edu/publications/OlivaTorralb_Hybrid_Siggraph06.pdf">paper</a> by Oliva, Torralba, and Schyns.
-<i>Hybrid images</i> are static images that change in interpretation as a function of the viewing distance.
-The basic idea is that high frequency tends to dominate perception when it is available, but, at a distance, only the low frequency (smooth) part of the signal can be seen.
-By blending the high frequency portion of one image with the low-frequency portion of another, you get a hybrid image that leads to different interpretations at different distances.
-</p>
-<br>
+Filtering is a kind of process of convolution. convolution is a mathematical operation on two functions f and g, producing a third function that is typically viewed as a modified version of one of the original functions. It may occurs to people that correlation is similar. The answer is, they refer to the same thing. In fact, 2-D correlation is related to 2-D convolution by a **180 degree rotation** of the filter matrix.
 
-##Details
+There're are mainly two types of image filtering. One is high-pass filter, and the other is low-pass filter. Pictures filtered through low-pass filter (e.g. Gaussian) will be more smooth. In contrast, pictures filtered through high-pass filter will be more sharpened.
 
-<p>
-This project is intended to familiarize you with MATLAB and image filtering. Once you have created an image filtering function, it is relatively straightforward to construct hybrid images. If you don't already know MATLAB, you will find this <a href="http://cs.brown.edu/courses/csci1430/docs/matlab-tutorial/">tutorial on MATLAB</a> helpful.
-</p><p>
-<b>Image Filtering.</b> Image filtering (or convolution) is a fundamental image processing tool. See chapter 3.2 of Szeliski and the lecture materials to learn about image filtering (specifically linear filtering). MATLAB has numerous built in and efficient functions to perform image filtering, but you will be writing your own such function from scratch for this assignment. More specifically, you will implement <code>my_imfilter()</code> which imitates the default behavior of the build in <code>imfilter()</code> function. As specified in <code>my_imfilter.m</code>, your filtering algorithm must (1) support grayscale and color images (2) support arbitrary shaped filters, as long as both dimensions are odd (e.g. 7x9 filters but not 4x5 filters) (3) pad the input image with zeros or reflected image content and (4) return a filtered image which is the same resolution as the input image. We have provided a script, <code>proj1_test_filtering.m</code>, to help you debug your image filtering algorithm. 
+- **Hybrid image**
 
-</p><p>
-<b>Hybrid Images.</b> A hybrid image is the sum of a low-pass filtered version of the one image and a high-pass filtered version of a second image. There is a free parameter, which can be tuned for each image pair, which controls <i>how much</i> high frequency to remove from the first image and how much low frequency to leave in the second image. This is called the "cutoff-frequency". In the paper it is suggested to use two cutoff frequencies (one tuned for each image) and you are free to try that, as well. In the starter code (`proj1.m`), the cutoff frequency is controlled by changing the standard deviation of the Gausian filter used in constructing the hybrid images.
-</p><p>
-We provide you with 5 pairs of aligned images which can be merged reasonably well into hybrid images. The alignment is important because it affects the perceptual grouping (read the paper for details). We encourage you to create additional examples (e.g. change of expression, morph between different objects, change over time, etc.). See the <a href="http://cvcl.mit.edu/hybridimage.htm">hybrid images project page</a> for some inspiration. 
-</p><p>
-For the example shown at the top of the page, the two original images look like this:
-</p><p>
-</p><center><img src="./index_files/dog.jpg"><img src="./index_files/cat.jpg"></center>
-<p></p><p>
-The low-pass (blurred) and high-pass versions of these images look like this:
-</p><p>
-</p><center><img src="./index_files/low_frequencies.jpg"><img src="./index_files/high_frequencies.jpg"></center>
-<p></p><p>
-The high frequency image is actually zero-mean with negative values so it is visualized by adding 0.5. In the resulting visualization, bright values are positive and dark values are negative.
-</p><p>
-Adding the high and low frequencies together gives you the image at the top of this page. If you're having trouble seeing the multiple interpretations of the image, a useful way to visualize the effect is by progressively downsampling the hybrid image as is done below:
-</p><p>
-</p><center><img src="./index_files/cat_hybrid_image_scales.jpg"></center>
-<p></p><p>
-The starter code provides a function <code>vis_hybrid_image.m</code> to save and display such visualizations.
+By hybriding the high-pass-filtered image and low-pass-filtered image, one can create a kind of special image which change its content with the distance between it and viewer changing. To be specific, one can see high-pass-filtered (sharpened) image at a short distance while seeing low-pass-filtered (smooth) image at a long distance.
 
-</p><p>
-<b>Potentially useful MATLAB functions</b>: <code>fspecial()</code> and the operators in the <a href="http://cs.brown.edu/courses/csci1430/docs/matlab-tutorial/">MATLAB tutorial</a> which make it efficient to cut out image subwindows and do the convolution (dot product) between them. <code>padarray()</code>. 
-<br>
-<b>Forbidden functions</b> you can use for testing, but not in your final code: <code>imfilter()</code>, <code>filter2()</code>, <code>conv2()</code>, <code>nlfilter()</code>, <code>colfilt()</code>.
-</p><br>
+## Implementation
+- **Image filtering**
 
-## Extra Points
-* +2 pts: If you make your code publicly available.
-* +2 pts: If you comment on pull request from students who fork the homework. <del>Make sure you send me a screenshot of the comments to me.</del> We can follow your discussion ourselves.
-* Other things that impress me.
+`my_filter.m` is a function `my_filter()` intending to behave like the built-in function `imfilter()`. The objective of this function is filtering an image. It will have input of the raw image and the specified filter and output filtered image with the same resolution and size. I'll show some essential processes in my code below.
 
-## Writeup
-For this project, and all other projects, you must do a project report in results folder using [Markdown](https://help.github.com/articles/markdown-basics). We provide you with a placeholder [index.md](./results/index.md) document which you can edit. In the report you will describe your algorithm and any decisions you made to write your algorithm a particular way. Then, you will describe how to run your code and if your code depended on other packages. Finally, you will show and discuss the results of your algorithm. In the case of this project, show the results of your filtering algorithm (the test script saves such images already) and show some of the intermediate images in the hybrid image pipeline (e.g. the low and high frequency images, which the starter code already saves for you). Also, discuss anything extra you did. Feel free to add any other information you feel is relevant.
+In order to deal with the problem of that the filter can't be centered on pixels at the image boundary without parts of the filter being out of bounds, it need to be padded with zeros.
 
-## Rubric
-* +50 pts: Working implementation of image filtering in my_imfilter.m
-* +30 pts: Working hybrid image generation
-* +20 pts: Writeup with several examples of hybrid images
-* +10 pts: Extra credit (up to ten points)
-* -5*n pts: Lose 5 points for every time (after the first) you do not follow the instructions for the hand in format
+```
+% Get the row & column size of input image and filter in order to admit
+% multi size picture
+[intput_row, intput_col] = size(intput_image(:,:,1));
+[filter_row, filter_col] = size(filter);
 
-## Get start & hand in
-* Publicly fork version (+2 extra points)
-	- [Fork the homework](https://education.github.com/guide/forks) to obtain a copy of the homework in your github account
-	- [Clone the homework](http://gitref.org/creating/#clone) to your local space and work on the code locally
-	- Commit and push your local code to your github repo
-	- Once you are done, submit your homework by [creating a pull request](https://help.github.com/articles/creating-a-pull-request)
+% Pad image with zeros (amount = minimum need of filter = half of row and
+% column
+pad_input_image = padarray(intput_image, [(filter_row - 1)/2, (filter_col - 1)/2]);
+```
+Because of difficulty of implementing 2-D convolution, I make the decision to process it by twice 1-D convolution. That is, firstly convolute with vertical mask and secondly convolute with horizontal mask. In matlab, we can convolute the matrixs by using useful build-in function, `im2col` and `col2im`. Finally, output it.
 
-* [Privately duplicated version](https://help.github.com/articles/duplicating-a-repository)
-  - Make a bare clone
-  - mirror-push to new repo
-  - [make new repo private](https://help.github.com/articles/making-a-private-repository-public)
-  - [add aliensunmin as collaborator](https://help.github.com/articles/adding-collaborators-to-a-personal-repository)
-  - [Clone the homework](http://gitref.org/creating/#clone) to your local space and work on the code locally
-  - Commit and push your local code to your github repo
-  - I will clone your repo after the due date
+```
+output = [];
+for layer = 1:3
+    % make all filter_row*filter_col size patch of input image be columns
+    columns = im2col(pad_input_image(:,:,layer), [filter_row, filter_col]);
+    
+    % transpose the filter in order to make it convolution (but not correlation)
+    filter2 = transpose(filter(:));
+    
+    % filter the image
+    filterd_columns = filter2 * columns;
+    
+    % recover from columns to image form
+    output(:,:,layer) = col2im(filterd_columns, [1, 1], [intput_row, intput_col]);
+end
+```
 
-## Credits
-	Assignment modified by Min Sun based on James Hays and Derek Hoiem's previous developed projects
+- **Low-frequencies image and High-frequencies image**
+
+At first, because of using twice 1-D gaussian filter in `my_filter()`, we need to change code in `proj1.m` to make it be 1-D filter.
+
+`filter = fspecial('Gaussian', [cutoff_frequency*4+1 1], cutoff_frequency);`
+
+By using Gaussian filter, one can get low-frequencies pictures. And if we would like to get high-frequencies pictures, one easy approach is just output the image subtracted by its low-frequencies image.
+
+```
+low_frequencies = my_imfilter(my_imfilter(image1, filter), filter'); 
+high_frequencies = image2 - my_imfilter(my_imfilter(image2, filter), filter');
+```
+
+Consequently, we get low frequencies image and high frequencies image repectively.
+
+- **Hybriding image**
+
+Just plus them.
+
+`hybrid_image = low_frequencies + high_frequencies;`
+
+## Installation
+Download the repository, open your matlab and change the work folder to `homework1/code`. Then, set images path of `image1` and `image2`.
+
+Finally, click *Run*!
+
+## Results
+
+I've tried 4 samples of hybriding image. First one is the hybrid image of candidates of next precident of R.O.C., Tsai Ing-Wen & Hung Hsiu-Chu. I found that by tuning the cut-off frequency one can get really different result. For example, the cut-off frequency of the first sample is set 14 (pixels).
+
+Following pairs are bird & plane, Marilyn & Einstein and motorcycle & bicycle.
+
+<table border=1>
+<tr>
+<td>
+<img src="../results/tsai_hung_14.jpg" width="24%"/>
+<img src="../results/bird_plane_6.png"  width="24%"/>
+</td>
+</tr>
+
+<tr>
+<td>
+<img src="../results/marilyn_einstein_6.png" width="24%"/>
+<img src="../results/motor_bicycle_8.png" width="24%"/>
+</td>
+</tr>
+</table>
+
+For gray-scale image, I also tried it and show the result below.
+
+<table border=1>
+<tr>
+<td>
+<img src="../results/tsai_hung_rgb.jpg" width="50%"/>
+</td>
+</tr>
+</table>
