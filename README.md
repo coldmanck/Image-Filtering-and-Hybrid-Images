@@ -84,15 +84,15 @@ Following pairs are bird & plane, Marilyn & Einstein and motorcycle & bicycle.
 <table border=1>
 <tr>
 <td>
-<img src="../results/tsai_hung_14.jpg" width="24%"/>
-<img src="../results/bird_plane_6.png"  width="24%"/>
+<img src="results/tsai_hung_14.jpg" width="24%"/>
+<img src="results/bird_plane_6.png"  width="24%"/>
 </td>
 </tr>
 
 <tr>
 <td>
-<img src="../results/marilyn_einstein_6.png" width="24%"/>
-<img src="../results/motor_bicycle_8.png" width="24%"/>
+<img src="results/marilyn_einstein_6.png" width="24%"/>
+<img src="results/motor_bicycle_8.png" width="24%"/>
 </td>
 </tr>
 </table>
@@ -102,7 +102,7 @@ For gray-scale image, I also tried it and show the result below.
 <table border=1>
 <tr>
 <td>
-<img src="../results/tsai_hung_rgb.jpg" width="50%"/>
+<img src="results/tsai_hung_rgb.jpg" width="50%"/>
 </td>
 </tr>
 </table>
